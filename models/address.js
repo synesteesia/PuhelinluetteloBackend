@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
-const { response } = require('express')
 
 
 const url = process.env.MONGODB_URI
@@ -21,7 +20,7 @@ const addressSchema = new mongoose.Schema({
   number: { type: String, required: true, minlength: 8 }
 })
 
-//addressSchema.plugin(uniqueValidator, response.status(400).send({ message: 'Error, expected name to be unique.' }))
+addressSchema.plugin(uniqueValidator, { message: 'Error, expected name to be unique.' })
 
 addressSchema.set('toJSON', {
   transform: (document, returnedObject) => {
